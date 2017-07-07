@@ -19,29 +19,64 @@
 
 		var breakLength = 5;
 		var sessionLength = 25;
+		var breakReset = 5;
+		var sessionReset = 25;
+
+
+		// grab the values to which we will need to reset lengths
+		function setResets(){
+			breakReset = breakLength;
+			sessionReset = sessionLength;
+		}
 
 		function breakPlus(){
 			breakLength++;
 			$('#breakIndicator').text(breakLength);
+			setResets();
 		}
 
 		function breakMinus(){
 			breakLength--;
 			$('#breakIndicator').text(breakLength);
+			setResets();
 		}
 
 		function sessionPlus(){
 			sessionLength++;
 			$('#sessionIndicator').text(sessionLength);
+			setResets();
 		}
 
 		function sessionMinus(){
 			sessionLength--;
 			$('#sessionIndicator').text(sessionLength);
+			setResets();
+		}
+
+		var timer;
+
+		function start(){
+			timer = setInterval(function(){ countdown() }, 1000);
+		}
+
+		function countdown() {
+		  console.log('countdown called');
+	    sessionLength--;
+	    $('#sessionIndicator').text(sessionLength);
+		}
+
+		function pause() {
+		  clearInterval(timer);
+		}
+
+		function reset() {
+			sessionLength = sessionReset;
+			breakLength = breakReset;
+			$('#sessionIndicator').text(sessionReset);
+			$('#breakIndicator').text(breakReset);
 		}
 
 			$(document).ready(function() {
-
 				$('#breakIndicator').html(breakLength);
 				$('#sessionIndicator').text(sessionLength);
 
@@ -49,6 +84,10 @@
 				$('#btnBreakMinus').on('click', function() {breakMinus();});
 				$('#btnSessionPlus').on('click', function() {sessionPlus();});
 				$('#btnSessionMinus').on('click', function() {sessionMinus();});
+				
+				$('#btnStart').on('click', function() {start();});
+				$('#btnPause').on('click', function() {pause();});
+				$('#btnReset').on('click', function() {reset();});
 
 			});
 
@@ -57,12 +96,17 @@
 		<div id="main" class="container">	
 
 			<p id="breakIndicator">Break</p>
-			<button id="btnBreakPlus" type="button" class="btn btnGrey">+</button>
-			<button id="btnBreakMinus" type="button" class="btn btnGrey">-</button>
+			<button id="btnBreakMinus" type="button" class="btn">-</button>
+			<button id="btnBreakPlus" type="button" class="btn">+</button>
 
 			<p id="sessionIndicator">Session</p>
-			<button id="btnSessionPlus" type="button" class="btn btnGrey">+</button>
-			<button id="btnSessionMinus" type="button" class="btn btnGrey">-</button>
+			<button id="btnSessionMinus" type="button" class="btn">-</button>
+			<button id="btnSessionPlus" type="button" class="btn">+</button>
+			<br><br>
+			<br>
+			<button id="btnStart" type="button" class="btn">START</button>
+			<button id="btnPause" type="button" class="btn">PAUSE</button>
+			<button id="btnReset" type="button" class="btn">RESET</button>
 
 		</div>
 
