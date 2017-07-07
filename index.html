@@ -18,9 +18,9 @@
 		<script>
 
 		var breakLength = 5;
-		var sessionLength = 25;
+		var sessionLength = 10;
 		var breakReset = 5;
-		var sessionReset = 25;
+		var sessionReset = 10;
 
 
 		// grab the values to which we will need to reset lengths
@@ -60,9 +60,17 @@
 		}
 
 		function countdown() {
-		  console.log('countdown called');
-	    sessionLength--;
-	    $('#sessionIndicator').text(sessionLength);
+		  console.log('session length: ' + sessionLength);
+		  if (sessionLength>0){
+	    	sessionLength--;
+	    	$('#sessionIndicator').text(sessionLength);
+		  } else if (breakLength>0){
+		  	breakLength--;
+		  	$('#breakIndicator').text(breakLength);
+		  } else{
+		  	pause();
+		  	reset();
+		  }
 		}
 
 		function pause() {
