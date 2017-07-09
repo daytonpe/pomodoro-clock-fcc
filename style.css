@@ -1,9 +1,15 @@
-*{
+p{
 	font-family: 'Source Sans Pro', sans-serif;
 }
 
+h1,button{
+	font-family: 'Italianno', cursive;
+	color: #A30303;
+	font-size: 65px;
+}
+
 html, body { 
-  background: url(http://wallpapercave.com/wp/BhcQpIw.jpg) no-repeat center center fixed; 
+  background: url(https://wallpaperscraft.com/image/ponte_vecchio_florence_italy_river_bridge_building_day_48231_1920x1200.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -12,7 +18,7 @@ html, body {
 }
 
 #main{
-	margin-top: 18em;
+	margin-top: 5em;
 	text-align: center;
 }
 
@@ -21,12 +27,24 @@ html, body {
   width: 200px;
   height: 200px;
 }
-/*.progress {
-  background-color: #aaa;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}*/
+
+.progress {
+  height: 33px
+}
 
 .progress-bar-green{
+	background-image: url(https://t4.ftcdn.net/jpg/01/42/70/51/240_F_142705167_bjh2AnUuzfqzwsWr5xuDh1LXOfQZDeVe.jpg) ;
 	background-color: green;
+	background-size: 50px;
 }
+
+.progress-bar-red{
+	background-image: url(http://bgfons.com/upload/small/tomatoes_PNG5215.png) ;
+	background-color: red;
+	background-size: 150px;
+}
+
+button{
+	background-color: transparent;
+}
+

@@ -7,6 +7,7 @@
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Italianno" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -18,7 +19,7 @@
 		<script>
 
 		var timer;
-		
+
 		//in seconds
 		var breakLength = 300;
 		var sessionLength = 1500;
@@ -26,9 +27,9 @@
 		var sessionReset = 1500;
 
 		//setting progress bars
-		var cycleTime = breakLength+sessionLength;
-		var greenBar = Math.round((breakLength/cycleTime)*10000)/100;
-		var blueBar = 100-greenBar;
+		var cycleTime;
+		var greenBar;
+		var redBar;
 
 
 		// grab the values to which we will need to reset lengths
@@ -37,28 +38,50 @@
 			sessionReset = sessionLength;
 		}
 
+		function decrementProgressBars(){
+			 //percent of bars remaining
+			var sessionBarRemaining = (sessionLength/sessionReset) *redBar;
+			var breakBarRemaining = (breakLength/breakReset) *   greenBar;
+			$('#redBar').css('width', sessionBarRemaining+'%');
+			$('#greenBar').css('width', breakBarRemaining+'%');
+			console.log(sessionBarRemaining+ " " +breakBarRemaining);
+			// console.log(redBar+ " " +greenBar);
+		}
+
+		function resetProgressBars(){
+			cycleTime = breakLength+sessionLength;
+			greenBar = Math.round((breakLength/cycleTime)*10000)/100;
+			redBar = 100-greenBar;
+			$('#redBar').css('width', redBar+'%');
+			$('#greenBar').css('width', greenBar+'%');
+		}
+
 		function breakPlus(){
 			breakLength+=60;
 			$('#breakIndicator').text(timeConvert(breakLength));
 			setResets();
+			resetProgressBars();
 		}
 
 		function breakMinus(){
 			breakLength-=60;
 			$('#breakIndicator').text(timeConvert(breakLength));
 			setResets();
+			resetProgressBars();
 		}
 
 		function sessionPlus(){
 			sessionLength+=60;
 			$('#sessionIndicator').text(timeConvert(sessionLength));
 			setResets();
+			resetProgressBars();
 		}
 
 		function sessionMinus(){
 			sessionLength-=60;
 			$('#sessionIndicator').text(timeConvert(sessionLength));
 			setResets();
+			resetProgressBars();
 		}
 
 
@@ -67,13 +90,15 @@
 		}
 
 		function countdown() {
-		  console.log('session length: ' + sessionLength);
+		  // console.log('session length: ' + sessionLength);
 		  if (sessionLength>0){
 	    	sessionLength--;
 	    	$('#sessionIndicator').text(timeConvert(sessionLength));
+	    	decrementProgressBars();
 		  } else if (breakLength>0){
 		  	breakLength--;
 		  	$('#breakIndicator').text(timeConvert(breakLength));
+		  	decrementProgressBars();
 		  } else{
 		  	pause();
 		  	reset();
@@ -90,6 +115,7 @@
 			breakLength = breakReset;
 			$('#sessionIndicator').text(timeConvert(sessionReset));
 			$('#breakIndicator').text(timeConvert(breakReset));
+			resetProgressBars();
 		}
 
 		//convert x seconds into time in the format 25:45
@@ -114,18 +140,19 @@
 				$('#btnPause').on('click', function() {pause();});
 				$('#btnReset').on('click', function() {reset();});
 				
-				$('#blueBar').css('width', blueBar+'%');
-				$('#greenBar').css('width', greenBar+'%');
+				resetProgressBars();
 
 			});
 
 		</script>
 
 		<div id="main" class="container">	
+			<h1>Orologio di Pomodoro</h1>
+
 			<div>	
 				<div class="progress">
 				  <div id="greenBar" class="progress-bar progress-bar-green" role="progressbar" style="width: 20%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-				  <div id="blueBar" class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+				  <div id="redBar" class="progress-bar progress-bar-red" role="progressbar" style="width: 80%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
 				</div>
 			</div>
 
