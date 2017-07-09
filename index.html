@@ -17,10 +17,18 @@
 
 		<script>
 
-		var breakLength = 5;
-		var sessionLength = 10;
-		var breakReset = 5;
-		var sessionReset = 10;
+		var timer;
+		
+		//in seconds
+		var breakLength = 300;
+		var sessionLength = 1500;
+		var breakReset = 300;
+		var sessionReset = 1500;
+
+		//setting progress bars
+		var cycleTime = breakLength+sessionLength;
+		var greenBar = Math.round((breakLength/cycleTime)*10000)/100;
+		var blueBar = 100-greenBar;
 
 
 		// grab the values to which we will need to reset lengths
@@ -30,30 +38,29 @@
 		}
 
 		function breakPlus(){
-			breakLength++;
-			$('#breakIndicator').text(breakLength);
+			breakLength+=60;
+			$('#breakIndicator').text(timeConvert(breakLength));
 			setResets();
 		}
 
 		function breakMinus(){
-			breakLength--;
-			$('#breakIndicator').text(breakLength);
+			breakLength-=60;
+			$('#breakIndicator').text(timeConvert(breakLength));
 			setResets();
 		}
 
 		function sessionPlus(){
-			sessionLength++;
-			$('#sessionIndicator').text(sessionLength);
+			sessionLength+=60;
+			$('#sessionIndicator').text(timeConvert(sessionLength));
 			setResets();
 		}
 
 		function sessionMinus(){
-			sessionLength--;
-			$('#sessionIndicator').text(sessionLength);
+			sessionLength-=60;
+			$('#sessionIndicator').text(timeConvert(sessionLength));
 			setResets();
 		}
 
-		var timer;
 
 		function start(){
 			timer = setInterval(function(){ countdown() }, 1000);
@@ -63,13 +70,14 @@
 		  console.log('session length: ' + sessionLength);
 		  if (sessionLength>0){
 	    	sessionLength--;
-	    	$('#sessionIndicator').text(sessionLength);
+	    	$('#sessionIndicator').text(timeConvert(sessionLength));
 		  } else if (breakLength>0){
 		  	breakLength--;
-		  	$('#breakIndicator').text(breakLength);
+		  	$('#breakIndicator').text(timeConvert(breakLength));
 		  } else{
 		  	pause();
 		  	reset();
+		  	start();
 		  }
 		}
 
@@ -80,13 +88,22 @@
 		function reset() {
 			sessionLength = sessionReset;
 			breakLength = breakReset;
-			$('#sessionIndicator').text(sessionReset);
-			$('#breakIndicator').text(breakReset);
+			$('#sessionIndicator').text(timeConvert(sessionReset));
+			$('#breakIndicator').text(timeConvert(breakReset));
+		}
+
+		//convert x seconds into time in the format 25:45
+		function timeConvert(x){
+			var min = Math.floor(x/60);
+			var sec = x%60;
+			var formattedSec = ("0" + sec).slice(-2);
+			var str = min+':'+formattedSec;
+			return str;
 		}
 
 			$(document).ready(function() {
-				$('#breakIndicator').html(breakLength);
-				$('#sessionIndicator').text(sessionLength);
+				$('#breakIndicator').text(timeConvert(breakLength));
+				$('#sessionIndicator').text(timeConvert(sessionLength));
 
 				$('#btnBreakPlus').on('click', function() {breakPlus();});
 				$('#btnBreakMinus').on('click', function() {breakMinus();});
@@ -96,12 +113,21 @@
 				$('#btnStart').on('click', function() {start();});
 				$('#btnPause').on('click', function() {pause();});
 				$('#btnReset').on('click', function() {reset();});
+				
+				$('#blueBar').css('width', blueBar+'%');
+				$('#greenBar').css('width', greenBar+'%');
 
 			});
 
 		</script>
 
 		<div id="main" class="container">	
+			<div>	
+				<div class="progress">
+				  <div id="greenBar" class="progress-bar progress-bar-green" role="progressbar" style="width: 20%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+				  <div id="blueBar" class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
 
 			<p id="breakIndicator">Break</p>
 			<button id="btnBreakMinus" type="button" class="btn">-</button>
