@@ -149,29 +149,69 @@
 		<div id="main" class="container">	
 			<h1>Orologio di Pomodoro</h1>
 
-			<div>	
+			<div id="progressBarDiv">	
 				<div class="progress">
 				  <div id="greenBar" class="progress-bar progress-bar-green" role="progressbar" style="width: 20%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
 				  <div id="redBar" class="progress-bar progress-bar-red" role="progressbar" style="width: 80%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
 				</div>
 			</div>
-
-			<p id="breakIndicator">Break</p>
-			<button id="btnBreakMinus" type="button" class="btn">-</button>
-			<button id="btnBreakPlus" type="button" class="btn">+</button>
-
-			<p id="sessionIndicator">Session</p>
-			<button id="btnSessionMinus" type="button" class="btn">-</button>
-			<button id="btnSessionPlus" type="button" class="btn">+</button>
-			<br><br>
-			<br>
-			<button id="btnStart" type="button" class="btn">START</button>
-			<button id="btnPause" type="button" class="btn">PAUSE</button>
-			<button id="btnReset" type="button" class="btn">RESET</button>
+			
+			<div id="controllerDiv">
+				<div class="row">
+					<div class="col col-sm-4">
+						<button id="btnBreakMinus" type="button" class="btn">
+						<h2>-</h2>
+						</button>
+					</div>
+					<div class="col col-sm-4">
+						<h2 id="breakIndicator">Break</h2>					
+					</div>
+					<div class="col col-sm-4">
+						<button id="btnBreakPlus" type="button" class="btn">
+						<h2>+</h2>
+						</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-sm-4">
+						<button id="btnSessionMinus" type="button" class="btn">
+						<h2>-</h2>
+						</button>
+					</div>
+					<div class="col col-sm-4">
+						<h2 id="sessionIndicator">Session</h2>
+					</div>
+					<div class="col col-sm-4">
+						<button id="btnSessionPlus" type="button" class="btn changeButton">
+						<h2 class="">+</h2>
+						</button>		
+					</div>
+				</div>	
+				
+				<div class="row" id="btnRow">
+					<div class="col col-md-4">
+						<button id="btnStart" type="button" class="btn">
+							<h2>Start</h2>
+						</button>						
+					</div>
+					<div class="col col-md-4">
+						<button id="btnPause" type="button" class="btn">
+							<h2>Pause</h2>
+						</button>					
+					</div>
+					<div class="col col-md-4">
+						<button id="btnReset" type="button" class="btn">
+							<h2>Reset</h2>
+						</button>						
+					</div>
+				</div>
+			</div>
 
 		</div>
-
-		<!-- <p id="credit">Coded by Pat Dayton</p> -->
+		
+		<footer>	
+			<p id="credit">Coded by Pat Dayton</p>
+		</footer>
 
 	</body>
 

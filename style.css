@@ -1,15 +1,27 @@
-p{
-	font-family: 'Source Sans Pro', sans-serif;
+*{
+	font-family: 'Italianno', cursive;
+	color: white;
 }
 
-h1,button{
-	font-family: 'Italianno', cursive;
-	color: #A30303;
-	font-size: 65px;
+h1{
+	font-size: 3em;
+}
+
+h2{
+	font-size: 2em;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+
+.row{
+	/*height: 35px;*/
 }
 
 html, body { 
-  background: url(https://wallpaperscraft.com/image/ponte_vecchio_florence_italy_river_bridge_building_day_48231_1920x1200.jpg) no-repeat center center fixed; 
+	/*background-size: 120% cover;*/
+  background: url(http://renatures.com/wp-content/uploads/2016/09/fields-countryside-sky-landscape-grass-italian-hills-italy-full-hd-wallpaper.jpg) no-repeat center center fixed; 
+  /*background-color: white;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -18,7 +30,7 @@ html, body {
 }
 
 #main{
-	margin-top: 5em;
+	margin-top: 3em;
 	text-align: center;
 }
 
@@ -29,7 +41,8 @@ html, body {
 }
 
 .progress {
-  height: 33px
+  height: 20px;
+  border-radius: 20px;
 }
 
 .progress-bar-green{
@@ -44,7 +57,43 @@ html, body {
 	background-size: 150px;
 }
 
-button{
+button, .btn{
+	padding-top: 0px;
 	background-color: transparent;
+	padding: 0px;
 }
 
+#progressBarDiv{
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#controllerDiv{
+	width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn:visited, .btn:active, .btn:focus, .btn:hover{
+	color: white;
+}
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+  outline: none;
+  /*outline: 5px auto -webkit-focus-ring-color;*/
+  /*outline-offset: -2px;*/
+}
+
+#credit{
+	/*margin-top: 10em;*/
+	text-align: center;
+}
+
+footer {
+	width: 100%;
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	bottom: 0px;
+}
